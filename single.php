@@ -20,26 +20,26 @@
 				<?php } ?>
 			</div>
 			<div class="card-body">
-				<h1 class="card-title text-center">
+				<h1 class="text-center">
 					<?php the_title(); ?>
 				</h1>
 				<div class="article-details">
 					<span class="category">
 						分类：<?php the_category(); ?>
 					</span>
-					<span class="lable_div d-none d-sm-block">
+					<span class="lable_div d-b">
 						标签：<?php the_tags('','',''); ?>
 					</span>
 					<span>
 						出生于：<?php the_date(); ?>
 					</span>
-					<span class="d-none d-sm-block">
+					<span class="d-b">
 						吹水：
 						<a href="<?php comments_link(); ?>">
 							<?php comments_number( __('还没吐槽','dpt') , __('一楼是基佬','dpt') , __('% 回复','dpt') ); ?>
 						</a>
 					</span>
-					<span class="d-none d-sm-block">
+					<span class="d-b">
 						围观：<?php echo get_post_meta( $post->ID, '_read', true);?>
 					</span>
 					<span>
@@ -74,4 +74,4 @@
 	<?php comments_template( '', true ); ?>
 </div>
 
-	<?php get_footer(); ?>
+<?php get_footer(); ?>

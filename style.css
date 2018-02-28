@@ -1931,7 +1931,9 @@ footer .jitter {
     body {
         overflow-x: hidden;
     }
-
+    .d-b{
+        display: none;
+    }
     .head_content {
         display: none;
     }
@@ -2165,4 +2167,5 @@ footer .jitter {
     .wrap {
         min-height: 390px;
     }
+    
 }
