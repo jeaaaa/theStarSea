@@ -3,7 +3,7 @@
 
 
 <div id="page" class="page">
-    <div class="header-img mt-1">
+    <div class="header-img mb-3">
         <img src="<?php echo get_template_directory_uri(); ?>/images/upload/header.png" alt="">
     </div>
 
