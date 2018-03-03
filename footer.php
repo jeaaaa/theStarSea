@@ -76,9 +76,9 @@
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
   crossorigin="anonymous"></script> -->
 <script src="<?php echo get_template_directory_uri(); ?>/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/js/html5.js"></script>
+<script src="<?php echo get_template_directory_uri(); ?>/js/html5.js" type="text/javascript"></script>
 <script src="<?php echo get_template_directory_uri(); ?>/js/musicplayer.js" type="text/javascript" charset="utf-8"></script>
-<script src="<?php echo get_template_directory_uri(); ?>/js/musicplayer-list.js" type="text/javascript" charset="utf-8"></script> 
+<script src="<?php echo get_template_directory_uri(); ?>/js/musicplayer-list.js" type="text/javascript" charset="utf-8"></script>
 <script>
   var modeText = ['顺序播放', '单曲循环', '随机播放', '列表循环'];
   var player = new MPlayer({
@@ -89,7 +89,7 @@
       //// 专辑图片错误时显示的图片
       defaultImg: './images/icon/mplayer_error.png',
       // 自动播放
-      autoPlay: false,
+      autoPlay: true,
       //// 播放模式(0->顺序播放,1->单曲循环,2->随机播放,3->列表循环(默认))
       // playMode: 3,
       // playList: 0,

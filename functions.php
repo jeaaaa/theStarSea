@@ -45,51 +45,27 @@ if (!$already_has_thumb)  {
 }
 add_action('new_to_publish', 'autoset_featured');
 
-
-// 页面导航
-// function can_pagenavi () {
-// 	global $wp_query, $wp_rewrite;
-// 	$wp_query->query_vars['paged'] > 1 ? $current = $wp_query->query_vars['paged'] : $current = 1;
-// 	$pagination = array(
-// 		'base' => @add_query_arg('paged','%#%'),
-// 		'format' => '',
-// 		'total' => $wp_query->max_num_pages,
-// 		'current' => $current,
-// 		'show_all' => false,
-// 		'type' => 'plain',
-// 		'end_size'=>'0',
-// 		'mid_size'=>'5',
-// 		'prev_text' => __('←','can'),
-// 		'next_text' => __('→','can')
-// 	);
-
-// 	if( $wp_rewrite->using_permalinks() )
-// 		$pagination['base'] = user_trailingslashit( trailingslashit( remove_query_arg('s',get_pagenum_link(1) ) ) . 'page/%#%/', 'paged');
-
-// 	if( !empty($wp_query->query_vars['s']) )
-// 		$pagination['add_args'] = array('s'=>get_query_var('s'));
-// 	echo paginate_links($pagination);
-// }
 //分页导航
-function par_pagenavi($range = 9){
-	global $paged, $wp_query;
-	if ( !$max_page ) {$max_page = $wp_query->max_num_pages;}
-	if($max_page > 1){if(!$paged){$paged = 1;}
-	if($paged != 1){echo "<a href='" . get_pagenum_link(1) . "' class='extend' title='跳转到首页'> 返回首页 </a>";}
-	previous_posts_link(' 上一页 ');
-    if($max_page > $range){
-		if($paged < $range){for($i = 1; $i <= ($range + 1); $i++){echo "<a href='" . get_pagenum_link($i) ."'";
-		if($i==$paged)echo " class='current'";echo ">$i</a>";}}
-    elseif($paged >= ($max_page - ceil(($range/2)))){
-		for($i = $max_page - $range; $i <= $max_page; $i++){echo "<a href='" . get_pagenum_link($i) ."'";
-		if($i==$paged)echo " class='current'";echo ">$i</a>";}}
-	elseif($paged >= $range && $paged < ($max_page - ceil(($range/2)))){
-		for($i = ($paged - ceil($range/2)); $i <= ($paged + ceil(($range/2))); $i++){echo "<a href='" . get_pagenum_link($i) ."'";if($i==$paged) echo " class='current'";echo ">$i</a>";}}}
-    else{for($i = 1; $i <= $max_page; $i++){echo "<a href='" . get_pagenum_link($i) ."'";
-    if($i==$paged)echo " class='current'";echo ">$i</a>";}}
-	next_posts_link(' 下一页 ');
-	//if($paged != $max_page){echo "<a href='" . get_pagenum_link($max_page) . "' class='extend' title='跳转到最后一页'> 最后一页 </a>";}
-}
+function can_pagenavi () {
+	global $wp_query, $wp_rewrite;
+	$wp_query->query_vars['paged'] > 1 ? $current = $wp_query->query_vars['paged'] : $current = 1;
+	$pagination = array(
+		'base' => @add_query_arg('paged','%#%'),
+		'format' => '',
+		'total' => $wp_query->max_num_pages,
+		'current' => $current,
+		'show_all' => false,
+		'type' => 'plain',
+		'end_size'=>'0',
+		'mid_size'=>'5',
+		'prev_text' => __('←','can'),
+		'next_text' => __('→','can')
+	);
+	if( $wp_rewrite->using_permalinks() )
+		$pagination['base'] = user_trailingslashit( trailingslashit( remove_query_arg('s',get_pagenum_link(1) ) ) . 'page/%#%/', 'paged');
+	if( !empty($wp_query->query_vars['s']) )
+		$pagination['add_args'] = array('s'=>get_query_var('s'));
+	echo paginate_links($pagination);
 }
 
 // 评论附加函数
@@ -188,6 +164,9 @@ function wpjam_blogroll(){
     }
 }
 
+// function is_pjax(){
+// 	return array_key_exists('HTTP_X_PJAX', $_SERVER) && $_SERVER['HTTP_X_PJAX'];
+// }
 
 
 // 谷歌字体移除

@@ -1,6 +1,6 @@
 <?php if ( post_password_required() ) return; ?>
 
-<div id="cmt" class="cmt">
+<div  class="cmt">
     <div class="container">
         <div class="card-body">
             <div class="card-title">

@@ -33,6 +33,64 @@ function footerlocal(){
         $(".page").css( 'height',(b-c));
     }
 }
+$(document).pjax('a:not(.page_navi a)', '#page', {
+    fragment: '#page'
+});
+
+$(document).on('submit', 'form', function (event) {
+    $.pjax.submit(event, '#page', {
+        fragment: '#page'
+    });
+    $('.nav_search_input').blur();
+});
+
+$(document).on('pjax:send', function () {
+    $('#jax_load').show();
+});
+$(document).on('pjax:complete', function () {
+    $('#jax_load').hide();
+    $('.page_navi').hide();
+    $('.artic_li').css('left','0px');
+    waterfall();
+});
+$(document).on("pjax:popstate", function () {
+    $("#pmd5_qrcode_div").remove();
+});
+$(document).on('pjax:timeout', function (event) {
+    event.preventDefault();
+});
+function waterfall() { //瀑布流布局
+    var box_width = $('.box').eq(0).outerWidth();
+    if($(window).width()>700){
+      var num = Math.floor($(window).width() / box_width)-1;
+    }else{
+      var num = Math.floor($(window).width() / box_width);
+    }
+    $('#main').css({
+      'width': num * box_width + 'px',
+      'margin': '0 auto'
+    });
+    var height_arr = [];
+    $('.box').each(function (index, value) {
+      if (index < num) {
+        var box_height = $(value).outerHeight();
+        height_arr.push(box_height);
+        $(value).css('position', 'relative');
+      } else {
+        var min_height = Math.min.apply(null, height_arr); 
+        var min_index = $.inArray(min_height, height_arr); 
+        $(value).css({
+          'position': 'absolute',
+          'top': min_height + 'px',
+          'left': min_index * box_width + 'px'
+        });
+        height_arr[min_index] += $(value).outerHeight();
+      }
+    });
+    $('.pagea').css('height',$('.box:last').offset().top+$('.box:last').height()+'px');
+  }
+
+
 $(function(){
     //圆形轨迹的坐标点
     var x_arr = new Array();

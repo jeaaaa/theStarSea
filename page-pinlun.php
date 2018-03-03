@@ -1,5 +1,5 @@
 <?php get_header(); ?>
-<div class="page" >
+<div id="page" class="page" >
     <div class="wrap">
         <!-- Invisible SVG -->
         <svg viewBox="0 0 600 700" class="svg-defs">
@@ -35,9 +35,7 @@
             </svg>
         </div>
     </div>
-
     
-
     <?php comments_template('/comments-message.php'); ?>
 </div>
 <?php get_footer(); ?>

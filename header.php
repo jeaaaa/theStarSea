@@ -26,7 +26,8 @@
     <title><?php echo $title; ?></title>
     <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script>
-	
+    <script src="<?php echo get_template_directory_uri(); ?>/js/jquery.pjax.js"></script>
+    <script src="<?php echo get_template_directory_uri(); ?>/js/jquery-ias.min.js"></script>
     <?php wp_head();?>
     <!--[if lt IE 9]>
 	   <script src="<?php echo get_template_directory_uri(); ?>/js/html5.js" type="text/javascript"></script>
@@ -47,13 +48,31 @@
         }, 2000);    
       }
     });
-    </script>
+
+var ias = $.ias({
+    container: "#article_ctn", //包含所有文章的元素
+    item: ".artic_li", //文章元素
+    pagination: ".page_navi", //分页元素
+    next: ".page_navi .next", //下一页元素
+});
+ 
+ias.extension(new IASTriggerExtension({
+    text: 'Load more items', //此选项为需要点击时的文字
+    offset: 99, //设置此项后，到 offset+1 页之后需要手动点击才能加载，取消此项则一直为无限加载
+}));
+ias.extension(new IASSpinnerExtension());
+ias.extension(new IASNoneLeftExtension({
+    text: '没有更多的了哦', // 加载完成时的提示
+}));
+ias.on('rendered', function(items) {
+    $('.artic_li').css('left','0px');
+})
+</script>
 </head>
 
 <body>
 <canvas class="fireworks d-none d-sm-block"></canvas>
 <script src="<?php echo get_template_directory_uri(); ?>/js/mouseStars.js" type="text/javascript" charset="utf-8"></script>		
-  
 <header class="head_menu">
     <div class="head_menu_img">
         <img src="<?php echo get_template_directory_uri(); ?>/images/icon/header.jpg">
@@ -88,10 +107,19 @@
 	</div>
     <!-- 搜索 -->
     <div class="nav_search">
-		<form id="nav_search_form" method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>">
+		<form id="nav_search_form" data-pjax  method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>">
 			<input class="nav_search_input" type="text" name="s" id="s" placeholder="Search" size="10" />
 		</form>
 	</div>
 </nav>
+<div id="jax_load">
+    <div class="spinner">
+    <div class="rect1"></div>
+    <div class="rect2"></div>
+    <div class="rect3"></div>
+    <div class="rect4"></div>
+    <div class="rect5"></div>
+    </div>
+</div>
 
 <div id="totop" class="totop"></div>
